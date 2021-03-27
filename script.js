@@ -240,8 +240,6 @@ function draw() {
 	}
 
 	clampOffset();
-
-	text(offsetX, 0, 20)
 }
 
 function windowResized() {
