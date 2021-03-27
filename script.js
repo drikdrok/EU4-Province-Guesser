@@ -228,18 +228,20 @@ function draw() {
 	disableClick = false;
 
 	if (state == "playing" && focused){
-		if (mouseX < 100)
+		if (mouseX < 35*(width/1080))
 			offsetX += 20;
-		else if (mouseX > width - 100)
+		else if (mouseX > width - 35*(width/1080))
 			offsetX -= 20;
 
-		if (mouseY < 100)
+		if (mouseY < 35*(width/1080))
 			offsetY += 20;
-		else if (mouseY > height - 100)
+		else if (mouseY > height - 35*(width/1080))
 			offsetY -= 20;
 	}
 
 	clampOffset();
+
+	text(offsetX, 0, 20)
 }
 
 function windowResized() {
@@ -364,10 +366,14 @@ function loadRegions(){
 
 function mouseDragged(){
 	if (mouseButton != LEFT && state == "playing"){
-		offsetX = offsetX + (mouseX - dragStart[0]);
-	    offsetY = offsetY + (mouseY - dragStart[1]); 
+
+		offsetX += (mouseX - dragStart[0]);
+	    offsetY += (mouseY - dragStart[1]); 
 	    dragStart = [mouseX, mouseY];
 	}
+
+	clampOffset();
+
 	return false;
 }
 
@@ -474,15 +480,15 @@ function flipGroupOfCheckboxes(group){
 }
 
 function clampOffset(){
- 	if (offsetX > 100)
-		offsetX = 100;
-	else if (offsetX < -coloredMap.width * scaleFactor + width - 100)
-		offsetX = -coloredMap.width * scaleFactor + width - 100;
+ 	if (offsetX > 200*(width/1080))
+		offsetX = 200*(width/1080);
+	else if (offsetX < -coloredMap.width * scaleFactor + width - 200*(width/1080))
+		offsetX = -coloredMap.width * scaleFactor + width - 200*(width/1080);
 	
-	if (offsetY > 100)
-		offsetY = 100;
-	else if (offsetY < -coloredMap.height * scaleFactor + height - 100)
-		offsetY = -coloredMap.height * scaleFactor + height- 100;
+	if (offsetY > 200*(width/1080))
+		offsetY = 200*(width/1080);
+	else if (offsetY < -coloredMap.height * scaleFactor + height - 200*(width/1080))
+		offsetY = -coloredMap.height * scaleFactor + height - 200*(width/1080);
     
 }
 
